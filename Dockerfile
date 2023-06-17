@@ -6,5 +6,4 @@ RUN apt update && \
 RUN apt install -y \
 	motion
 RUN apt clean
-#RUN chown 777 /etc/motion
 ENTRYPOINT ["/usr/bin/tini", "--", "motion", "-c", "/config/motion.conf"]

@@ -1,13 +1,8 @@
-FROM debian:bookworm-slim
-RUN apt update && \
-	apt install -y \
+FROM alpine
+RUN apk add --no-cache \
 	tzdata \
-	tini && \
-	apt clean && \
-	rm -rf /var/lib/apt/lists/
-RUN apt update && \
-	apt install --no-install-recommends -y \
-	motion && \
-	apt clean && \
-	rm -rf /var/lib/apt/lists/
-ENTRYPOINT ["/usr/bin/tini", "--", "motion", "-c", "/config/motion.conf"]
+	tini
+RUN apk add --no-cache \
+	-X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+	motion
+ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/motion", "-c", "/config/motion.conf"]

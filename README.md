@@ -26,6 +26,5 @@ A basic motion Dockerfile.
     user: 1000:044
     volumes:
     - /opt/motion/config:/config:ro
-    - /opt/motion/data:/data:rw
 
 ```
